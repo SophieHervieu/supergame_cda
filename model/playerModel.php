@@ -10,7 +10,7 @@ class PlayerModel implements InterfaceModel{
     private ?PDO $bdd;
 
     //Constructeur
-    public function __construct(?PDO $bdd){
+    public function __construct(){
         $this->bdd = connect();
     }
 
@@ -70,28 +70,33 @@ class PlayerModel implements InterfaceModel{
     }
 
     //Méthodes
+    //Méthode qui permet l'ajout d'un joueur en bdd en liant chaque paramètre à une colonne de la table
     public function add(): ?string {
         try{
-            $bdd = $this->getBdd()->connect();
+            $bdd = $this->getBdd();
             $pseudo = $this->getPseudo();
+            $email = $this->getEmail();
+            $score = $this->getScore();
+            $psswrd = $this->getPassword();
 
             $requete = "INSERT INTO players(pseudo, email, score, psswrd)
             VALUE(?,?,?,?)";
             $req = $bdd->prepare($requete);
-            $req->bindParam(1,$pseudo[0], PDO::PARAM_STR);
-            $req->bindParam(2,$pseudo[1], PDO::PARAM_STR);
-            $req->bindParam(3,$pseudo[2], PDO::PARAM_STR);
-            $req->bindParam(4,$pseudo[3], PDO::PARAM_STR);
+            $req->bindParam(1,$pseudo, PDO::PARAM_STR);
+            $req->bindParam(2,$email, PDO::PARAM_STR);
+            $req->bindParam(3,$score, PDO::PARAM_INT);
+            $req->bindParam(4,$psswrd, PDO::PARAM_STR);
             $req->execute();
+            return "Le joueur a été ajouté avec succès";
         }
         catch(Exception $e) {
-            echo "Erreur : " . $e->getMessage();
+            return "Erreur : " . $e->getMessage();
         }
     }
-
+    //Méthode qui permet de récupérer tous les joueurs présents en bdd grâce à la méthode fetchAll
     public function getAll(): array | null {
         try {
-            $bdd = $this->getBdd()->connect();
+            $bdd = $this->getBdd();
 
             $requete = "SELECT id, pseudo, email, score FROM players";
             $req = $bdd->prepare($requete);
@@ -100,12 +105,13 @@ class PlayerModel implements InterfaceModel{
             return $data;
         } catch (Exception $e) {
             echo "Erreur : " . $e->getMessage();
+            return null;
         }
     }
-
+    //Méthode qui permet de récupérer un joueur en bdd par son adresse email en liant le paramètre email à la colonne correspondante et grâce à la méthode fetch
     public function getByEmail(): array | null | bool {
         try {
-            $bdd = $this->getBdd()->connect();
+            $bdd = $this->getBdd();
             $email = $this->getEmail();
 
             $requete = "SELECT id, pseudo, email, score, psswrd FROM players
@@ -117,6 +123,7 @@ class PlayerModel implements InterfaceModel{
             return $data;
         } catch (Exception $e) {
             echo "Erreur : " . $e->getMessage();
+            return null;
         }
     }
 }

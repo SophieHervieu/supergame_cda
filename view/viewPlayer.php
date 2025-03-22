@@ -1,6 +1,6 @@
 <?php
 //LA VIEW POUR LA CLASS ViewPlayer
-class ViewPlayer extends PlayerController{
+class ViewPlayer{
     //Attributs
     private ?string $signUpMessage = '';
     private ?string $playersList = '';
@@ -24,7 +24,7 @@ class ViewPlayer extends PlayerController{
         return $this;
     }
 
-    //Méthodes
+    //Fonction permettant d'afficher un formulaire dans la vue au format HTML
     public function displayView(): string {
         ob_start()
         ?>
@@ -33,6 +33,8 @@ class ViewPlayer extends PlayerController{
             <form action="" method="post">
                 <label for="pseudo">Pseudonyme</label>
                 <input type="text" name="pseudo">
+                <label for="score">Score</label>
+                <input type="number" name="score">
                 <label for="email">Email</label>
                 <input type="text" name="email">
                 <label for="password">Mot de passe</label>

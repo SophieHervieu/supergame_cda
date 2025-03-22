@@ -70,6 +70,6 @@ abstract class AbstractController{
         return $this;
     }
 
-    //Méthodes
+    //Méthode render permettant l'affichage de l'application dans la vue
     public abstract function render(): void;
 }

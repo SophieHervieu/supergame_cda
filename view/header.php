@@ -1,5 +1,6 @@
 <?php
-class ViewHeader extends AbstractController{
+class ViewHeader{
+    //Fonction permettant l'affichage du header dans la vue au format HTML
     public function displayView(): string {
         ob_start();
     ?>
@@ -8,7 +9,7 @@ class ViewHeader extends AbstractController{
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
+            <title>Supergame</title>
         </head>
         <body>
             <header>

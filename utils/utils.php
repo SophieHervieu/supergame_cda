@@ -14,12 +14,7 @@ function sanitize($data){
  *@return PDO l'objet de connexion à la bdd
 */
 function connect(): ?Object {
-    return new PDO(
-        'mysql:host=' .$_ENV['URL_BDD']. ';dbname=' .$_ENV['NAME_BDD'],
-        $_ENV['LOGIN_BDD'],
-        $_ENV['PASSWORD_BDD'],
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
+    return new PDO('mysql:host=localhost;dbname=supergame','root','',array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 }
 
 ?>

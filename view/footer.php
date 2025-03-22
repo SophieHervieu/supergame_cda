@@ -1,5 +1,6 @@
 <?php
-class ViewFooter extends AbstractController{
+class ViewFooter{
+    //Fonction permettant l'affichage du footer dans la vue au format HTML
     public function displayView(): string {
         ob_start();
     ?>
